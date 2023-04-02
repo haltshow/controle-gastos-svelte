@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite"
+}
+
+model Entrada {
+  id        Int      @id @default(autoincrement())
+  valor     Float
+  idOrigem  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  origem OrigemEntrada @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Saida {
+  id        Int      @id @default(autoincrement())
+  valor     Float
+  idOrigem  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  origem OrigemSaida @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model OrigemEntrada {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Entrada   Entrada[]
+}
+
+model OrigemSaida {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Saida     Saida[]
+}

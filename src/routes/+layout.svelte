@@ -5,13 +5,13 @@
 </script>
 
 <div class="app">
-	<Header />
+	<!-- <Header /> -->
 
 	<main>
 		<slot />
 	</main>
 
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <style>
