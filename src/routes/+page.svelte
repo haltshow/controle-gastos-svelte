@@ -36,21 +36,21 @@
 		<div class="bg-sky-500 text-sky-50 rounded-sm p-2">
 			<!-- icon -->
 			<p>
-				Total: R$ 1700,00
+				Total: R$ {Number(2700).toFixed(2).replace('.', ',')}
 			</p>
 		</div>
 
 		<div class="bg-green-500 text-sky-50 rounded-sm p-2">
 			<!-- icon -->
 			<p>
-				Entrada: R$ 3700,00
+				Entrada: R$ {Number(3700).toFixed(2).replace('.', ',')}
 			</p>
 		</div>
 
 		<div class="bg-red-500 text-sky-50 rounded-sm p-2">
 			<!-- icon -->
 			<p>
-				Saída: R$ 1000,00
+				Saída: R$ {Number(1000).toFixed(2).replace('.', ',')}
 			</p>
 		</div>
 	</div>
