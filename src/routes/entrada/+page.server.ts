@@ -3,21 +3,22 @@ import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/prisma";
 
 export const load: PageServerLoad = async () => {
+    const getEntradas = async () => {
+      
+        const entradas = await prisma.entrada.findMany({
+            include: {
+                origem: true,
+            }
+        });
+    
+        if (!entradas) {
+            return fail(500, { message: 'Não foi possível trazer todas as entradas.'})
+        }
+
+        return entradas
+    }
+
     return {
-        entradas: await prisma.entrada.findMany(),
+        entradas: getEntradas(),
     }
 };
-
-// export const actions: Actions = {
-//     getEntradas: async({  }) => {
-//         try {
-//             await prisma.entrada.findMany();
-//         } catch (err) {
-//             console.log(err)
-//             return fail(500, { message: 'Não foi possível trazer todas as entradas.'})
-//         }
-//         return {
-//             status: 201
-//         }
-//     }
-// };
