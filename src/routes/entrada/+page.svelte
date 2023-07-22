@@ -1,13 +1,11 @@
 <script lang="ts">
-    import AiOutlineNodeExpand from 'svelte-icons-pack/ai/AiOutlineNodeExpand';
     import Icon from 'svelte-icons-pack/Icon.svelte';
+    import AiOutlineNodeExpand from 'svelte-icons-pack/ai/AiOutlineNodeExpand';
 
 	import type { PageData } from "./$types";
     export let data: PageData
 
     const { entradas } : any = data
-
-    console.log("entradas: ", entradas)
 </script>   
 
 <section class="text-[22px] text-center">
@@ -22,7 +20,7 @@
 			</button>
 		</a>
 
-		<a href="/origem/cadastrar">
+		<a href="/origem/entrada/cadastrar">
 			<button type="button" class="bg-green-500 text-sky-50 text-[16px] p-2 rounded-md flex justify-center items-center gap-2">
 				<Icon src={AiOutlineNodeExpand} />
 				Cadastrar Origem
@@ -47,8 +45,8 @@
                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
                     Dt. Registro
                 </th>
-                <th scope="col" class="p-4">
-                    <span class="sr-only">Edit</span>
+                <th scope="col" colspan="2" class="py-3 px-6 text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-400">
+                    Ações
                 </th>
             </tr>
         </thead>
@@ -68,8 +66,13 @@
                         (entrada.createdAt.getMonth() < 10 ? '0' + entrada.createdAt.getMonth() : entrada.createdAt.getMonth()) + '/' + 
                         (entrada.createdAt.getFullYear())}
                     </td>
-                    <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                        <a href="/edit" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <td class="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
+                        <a href="/entrada/{entrada.id}"> <button class="text-blue-600 outline outline-1 rounded-md p-1"> Editar </button> </a>
+                    </td>
+                    <td class="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
+                        <form action="?/deleteEntrada&id={entrada.id}" method="POST">
+                            <button type="submit" class="text-red-600 outline outline-1 rounded-md p-1">Excluir</button>
+                        </form>
                     </td>
                 </tr>
             {/each}

@@ -8,20 +8,17 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-    createEntrada: async ({ request }) => {
-        const { origem, valor } = Object.fromEntries(await request.formData()) as {
-            origem: any,
-            valor: any
+    createOrigem: async ({ request }) => {
+        const { nome } = Object.fromEntries(await request.formData()) as {
+            nome: any,
         }
 
         try {
-            const response = await prisma.entrada.create({
+            await prisma.origemEntrada.create({
                 data: {
-                    idOrigem: Number(origem),
-                    valor: Number(valor)
+                    nome: nome,
                 }
             })
-            console.log("response: ", response);
         } catch(err) {
             console.log(err)
             return fail(500, {message: "Não foi possível criar a entrada!"})

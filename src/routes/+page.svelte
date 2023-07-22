@@ -12,7 +12,7 @@
 
 	<Icon src={AiOutlineNodeExpand} />
 
-	<h1 class="text-[32px] text-sky-500 mb-10">
+	<h1 class="text-[32px] text-sky-500 mb-8">
 		Sistema de Controle de Gastos
 	</h1>
 
