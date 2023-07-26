@@ -20,10 +20,10 @@
 			</button>
 		</a>
 
-		<a href="/origem/entrada/cadastrar">
+		<a href="/origem/entrada">
 			<button type="button" class="bg-green-500 text-sky-50 text-[16px] p-2 rounded-md flex justify-center items-center gap-2">
 				<Icon src={AiOutlineNodeExpand} />
-				Cadastrar Origem
+				Origem Entrada
 			</button>
 		</a>										
 	</div>
@@ -59,7 +59,7 @@
                             <label for="checkbox-table-1" class="sr-only">checkbox</label>
                         </div>
                     </td>
-                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{entrada.origem.nome}</td>
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{entrada.origem ? entrada.origem.nome : ''}</td>
                     <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">R$ {entrada.valor.toFixed(2)}</td>
                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {(entrada.createdAt.getDate() < 10 ? '0' + entrada.createdAt.getDate() : entrada.createdAt.getDate()) + '/' + 

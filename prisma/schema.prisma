@@ -13,21 +13,21 @@ datasource db {
 model Entrada {
   id        Int      @id @default(autoincrement())
   valor     Float
-  idOrigem  Int
+  idOrigem  Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  origem OrigemEntrada @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  origem OrigemEntrada? @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: SetNull)
 }
 
 model Saida {
   id        Int      @id @default(autoincrement())
   valor     Float
-  idOrigem  Int
+  idOrigem  Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  origem OrigemSaida @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  origem OrigemSaida? @relation(fields: [idOrigem], references: [id], onUpdate: Cascade, onDelete: SetNull)
 }
 
 model OrigemEntrada {

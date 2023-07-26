@@ -3,42 +3,42 @@ import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/prisma";
 
 export const load: PageServerLoad = async () => {
-    const getEntradas : any = async () => {
+    const getSaidas = async () => {
       
-        const entradas = await prisma.entrada.findMany({
+        const saidas = await prisma.saida.findMany({
             include: {
                 origem: true,
             }
         });
     
-        if (!entradas) {
-            return fail(500, { message: 'Não foi possível trazer todas as entradas.'})
+        if (!saidas) {
+            return fail(500, { message: 'Não foi possível trazer todas as saidas.'})
         }
 
-        return entradas
+        return saidas
     }
 
     return {
-        entradas: getEntradas(),
+        saidas: getSaidas(),
     }
 };
 
 export const actions: Actions = {
-    deleteEntrada: async ({ url } : any) => {
+    deleteSaida: async ({ url } : any) => {
         const id = url.searchParams.get("id");
         if (!id) {
             return fail(400, {mensagem: 'Requisição inválida. Passe um número como id.'});
         }
 
         try {
-            await prisma.entrada.delete({
+            await prisma.saida.delete({
                 where: {
                     id: Number(id)
                 }
             })
         } catch (err) {
             console.log(err)
-            return fail(500, { mensagem: 'Algo deu errado ao tentar excluir a entrada'});
+            return fail(500, { mensagem: 'Algo deu errado ao tentar excluir a saida'});
         }
 
         return {
