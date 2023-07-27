@@ -1,7 +1,4 @@
 <script lang="ts">
-    import Icon from 'svelte-icons-pack/Icon.svelte';
-    import AiOutlineNodeExpand from 'svelte-icons-pack/ai/AiOutlineNodeExpand';
-
 	import type { PageData } from "./$types";
     export let data: PageData
 
@@ -15,19 +12,17 @@
     <div class="flex justify-start gap-4 mb-4">
 		<a href="/entrada/cadastrar">
 			<button type="button" class="bg-green-500 text-sky-50 text-[16px] p-2 rounded-md flex justify-center items-center gap-2">
-				<Icon src={AiOutlineNodeExpand} />
 				Cadastrar Entrada
 			</button>
 		</a>
 
 		<a href="/origem/entrada">
 			<button type="button" class="bg-green-500 text-sky-50 text-[16px] p-2 rounded-md flex justify-center items-center gap-2">
-				<Icon src={AiOutlineNodeExpand} />
 				Origem Entrada
 			</button>
 		</a>										
 	</div>
-    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700 rounded-lg">
         <thead class="bg-gray-100 dark:bg-gray-700">
             <tr>
                 <th scope="col" class="p-4">
@@ -50,7 +45,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 rounded-lg">
             {#each entradas as entrada}
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                     <td class="p-4 w-4">
@@ -63,13 +58,15 @@
                     <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">R$ {entrada.valor.toFixed(2)}</td>
                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {(entrada.createdAt.getDate() < 10 ? '0' + entrada.createdAt.getDate() : entrada.createdAt.getDate()) + '/' + 
-                        (entrada.createdAt.getMonth() < 10 ? '0' + entrada.createdAt.getMonth() : entrada.createdAt.getMonth()) + '/' + 
+                        ((entrada.createdAt.getMonth() + 1 < 10) ? '0' + (entrada.createdAt.getMonth() + 1) : (entrada.createdAt.getMonth() + 1)) + '/' + 
                         (entrada.createdAt.getFullYear())}
                     </td>
-                    <td class="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
-                        <a href="/entrada/{entrada.id}"> <button class="text-blue-600 outline outline-1 rounded-md p-1"> Editar </button> </a>
+                    <td class="py-2 px-3 text-sm font-medium text-center whitespace-nowrap">
+                        <div>
+                            <a href="/entrada/{entrada.id}"> <button class="text-blue-600 outline outline-1 rounded-md p-1"> Editar </button> </a>
+                        </div>
                     </td>
-                    <td class="py-2 px-3 text-sm font-medium text-right whitespace-nowrap">
+                    <td class="py-2 px-3 text-sm font-medium text-center whitespace-nowrap">
                         <form action="?/deleteEntrada&id={entrada.id}" method="POST">
                             <button type="submit" class="text-red-600 outline outline-1 rounded-md p-1">Excluir</button>
                         </form>
