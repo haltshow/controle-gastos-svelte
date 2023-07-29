@@ -1,7 +1,7 @@
-<script>
-	import { enhance } from "$app/forms";
+<script lang="ts">
+    import type { ActionData } from "./$types";
 
-
+    export let form: ActionData
 </script>
 
 <section>
@@ -13,7 +13,7 @@
         Para criar e controlar suas finanças é necessário criar uma conta!
     </p>
 
-    <form method="post" use:enhance>
+    <form action="?/register" method="POST">
         <label class="block mb-4 text-[16px]">
             <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700">
                 Nome
@@ -37,6 +37,10 @@
             <input type="text" name="password" id="password" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
                 placeholder="Insira a sua Senha" />
         </label>
+
+        {#if form?.user}
+            <p class="text-red-500"> {form?.mensagem} </p>
+        {/if}
 
         <button type="submit" class="bg-blue-500 text-sky-50 rounded-sm p-2">
             Cadastrar

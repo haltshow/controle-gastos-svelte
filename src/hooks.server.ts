@@ -1,10 +1,22 @@
-import { handleHooks } from "@lucia-auth/sveltekit";
-import { auth } from "$lib/server/lucia";
-import type { Handle } from "@sveltejs/kit";
-import { sequence } from "@sveltejs/kit/hooks";
+import type { Handle } from '@sveltejs/kit'
 
-export const customHandle: Handle = async ({ resolve, event }) => {
-    return resolve(event)
+export const handle: Handle = async ({ event, resolve}) => {
+    const session = event.cookies.get('session')
+
+    if (!session) {
+        return await resolve(event)
+    }
+
+    const user = await prisma.user.findUnique({
+        where: { userAuthToken: session },
+        select: { name: true }
+    })
+
+    if (user) {
+        event.locals.user = {
+            name: user.name
+        }
+    }
+
+    return await resolve(event)
 }
-
-export const handle: Handle = sequence(handleHooks(auth), customHandle)

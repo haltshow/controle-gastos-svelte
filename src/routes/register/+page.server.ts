@@ -1,38 +1,51 @@
 import { fail, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
-import { auth } from "$lib/server/lucia";
+import type { Action, Actions, PageServerLoad } from './$types';
+import bcrypt from 'bcrypt';
 
-// export const load: PageServerLoad = async ({ locals }) => {
-//     const session = await locals.validate()
-//     if (session) {
-//         throw redirect(302, "/");
-//     }
-// };
+export const load:PageServerLoad = async () => {
 
-export const actions: Actions = {
-    default: async ({ request } : any) => {
-        const { name, username, password } = Object.fromEntries(
-            await request.formData(),
-        ) as Record<string, string>
-
-        console.log("name: ", name);
-
-        try {
-            await auth.createUser({
-                key: {
-                    providerId: "username",
-                    providerUserId: username.toLowerCase(),
-                    password
-                },
-                attributes: {
-                    name,
-                    username
-                }
-            })
-        } catch (err) {
-            console.log(err)
-            return fail(400, { mensagem: "Não foi possível registrar o usuário!"});
-        }
-        throw redirect(302, 'login')
-    }
 }
+
+const register: Action = async ({request}) => {
+    const data = await request.formData()
+    const username = data.get('username')
+    const password = data.get('password')
+    const name = data.get('name')
+
+    if (
+        typeof username !== 'string' ||
+        typeof password !== 'string' ||
+        typeof name !== 'string' ||
+        !username ||
+        !password ||
+        !name
+    ) {
+        return fail(400, { mensagem: "As informações enviadas são inválidas. Todas precisam ser string!"})
+    }
+
+    const user = await prisma.user.findUnique({
+        where: { username }
+    });
+
+    if (user) {
+        return fail(400, { mensagem: "Esse usuário já existe no sistema!", user: true})
+    }
+
+    try {
+        await prisma.user.create({
+            data: {
+                username,
+                name,
+                passwordHash: await bcrypt.hash(password, 10),
+                userAuthToken: crypto.randomUUID()
+            }
+        })
+    } catch (err) {
+        console.log(err)
+        return fail(500, { mensagem: "Ocorreu um erro ao tentar criar o usuário!"})
+    }
+
+    throw redirect(303, '/login');
+}
+
+export const actions: Actions = { register };

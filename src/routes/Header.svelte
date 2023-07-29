@@ -1,5 +1,10 @@
 <script>
+  import 'iconify-icon';
+  export let user = {
+    name: ''
+  }
 
+  console.log("user: ", user)
 </script>
 
 <header class="flex justify-center">
@@ -81,26 +86,40 @@
           <ul
             class="flex flex-col lg:flex-row lg:justify-center lg:items-center text-[18px] w-full"
             data-te-navbar-nav-ref>
-            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="/register"
-                data-te-nav-link-ref
-                data-te-ripple-init
-                data-te-ripple-color="light"
-                >Register</a
-              >
-            </li>
-            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="/login"
-                data-te-nav-link-ref
-                data-te-ripple-init
-                data-te-ripple-color="light"
-                >Login</a
-              >
-            </li>
+            {#if !user }
+              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  href="/register"
+                  data-te-nav-link-ref
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                  >Register</a
+                >
+              </li>
+              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  href="/login"
+                  data-te-nav-link-ref
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                  >Login</a
+                >
+              </li>
+            {:else}
+              <li class="mb-4 lg:mb-0 lg:pr-2 flex justify-center items-center" data-te-nav-item-ref>
+                <iconify-icon icon="material-symbols:logout"></iconify-icon>
+                <a
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  href="/login"
+                  data-te-nav-link-ref
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                  >Olá, {user?.name}</a
+                >
+              </li>
+            {/if}
           </ul>
         </div>
       </div>
