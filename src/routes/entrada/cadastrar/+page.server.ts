@@ -21,14 +21,11 @@ export const actions: Actions = {
                     valor: Number(valor)
                 }
             })
-            console.log("response: ", response);
+            return { success: true };
         } catch(err) {
             console.log(err)
             return fail(500, {message: "Não foi possível criar a entrada!"})
         }
 
-        return {
-            status: 201
-        }
     }
 };

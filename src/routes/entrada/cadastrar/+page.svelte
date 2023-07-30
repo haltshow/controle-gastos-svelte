@@ -1,9 +1,12 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
+    import type { ActionData } from "./$types";
+    import Toast from '../../../components/Toast.svelte';
 
     export let data: PageData
-
     $: ({origemEntrada} = data)
+
+    export let form: ActionData
 </script>
 
 <section class="text-[18px] text-center">
@@ -43,5 +46,9 @@
                 Salvar
             </button>
         </form>
+
     </div>
+    {#if form?.success } 
+        <Toast status="success" mensagem="Entrada criada com sucesso!"></Toast>
+    {/if}
 </section>

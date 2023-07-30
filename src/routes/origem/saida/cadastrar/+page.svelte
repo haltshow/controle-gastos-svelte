@@ -1,5 +1,8 @@
 <script lang="ts">
-	
+    import type { ActionData } from "./$types";
+    import Toast from '../../../../components/Toast.svelte';
+
+    export let form: ActionData
 </script>
 
 <section class="text-[18px] text-center">
@@ -28,4 +31,8 @@
             </button>
         </form>
     </div>
+
+    {#if form?.success } 
+        <Toast status="success" mensagem="Origem Saida criada com sucesso!"></Toast>
+    {/if}
 </section>

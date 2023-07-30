@@ -13,13 +13,12 @@ export const actions: Actions = {
                     nome: nome,
                 }
             })
+
+            return { success: true }
         } catch(err) {
             console.log(err)
             return fail(500, {message: "Não foi possível criar a origem saida!"})
         }
 
-        return {
-            status: 201
-        }
     }
 };

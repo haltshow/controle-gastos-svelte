@@ -5,7 +5,7 @@
 </script>
 
 <section>
-    <p>
+    <p class="text-[32px] text-center mb-8">
         Login
     </p>
 

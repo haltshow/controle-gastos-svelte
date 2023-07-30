@@ -38,13 +38,12 @@ export const actions: Actions = {
                     nome: origem,
                 }
             })
+
+            return { success: true }
         } catch(err) {
             console.log(err)
             return fail(500, {message: "Não foi possível editar a origem saida!"})
         }
 
-        return {
-            status: 200
-        }
     }
 };

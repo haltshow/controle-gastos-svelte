@@ -5,11 +5,11 @@
 </script>
 
 <section>
-    <p>
+    <p class="text-[32px] text-center mb-2">
         Cadastro
     </p>
 
-    <p>
+    <p class="text-[16px] text-center mb-8 text-blue-500">
         Para criar e controlar suas finanças é necessário criar uma conta!
     </p>
 
@@ -42,12 +42,12 @@
             <p class="text-red-500"> {form?.mensagem} </p>
         {/if}
 
-        <button type="submit" class="bg-blue-500 text-sky-50 rounded-sm p-2">
+        <button type="submit" class="bg-blue-500 text-sky-50 rounded-sm p-2 hover:bg-blue-600 hover:duration-150">
             Cadastrar
         </button>
     </form>
 
-    <p> 
+    <p class="mt-2"> 
         Já possui uma conta? 
         <a href="/login" class="text-blue-500 decoration-none">Login</a>
     </p>

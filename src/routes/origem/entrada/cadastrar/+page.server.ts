@@ -19,13 +19,14 @@ export const actions: Actions = {
                     nome: nome,
                 }
             })
+
+            return {
+                success: true
+            }
         } catch(err) {
             console.log(err)
             return fail(500, {message: "Não foi possível criar a entrada!"})
         }
 
-        return {
-            status: 201
-        }
     }
 };
