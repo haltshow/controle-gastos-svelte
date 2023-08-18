@@ -19,12 +19,6 @@ export const handle: Handle = async ({ event, resolve}) => {
             name: user.name,
             username: user.username
         }
-    } else {
-        event.locals.user = {
-            id: '',
-            name: '',
-            username: ''
-        }
     }
 
     return await resolve(event)
