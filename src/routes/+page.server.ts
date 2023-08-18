@@ -69,5 +69,12 @@ export const load: PageServerLoad = async ({ locals }) => {
             entradasByOrigem: sumEntradaGroupByOrigem(),
             saidasByOrigem: sumSaidaGroupByOrigem(),
         }
+    } else {
+        return {
+            entrada: 0, 
+            saida: 0,
+            entradasByOrigem: [],
+            saidasByOrigem: [],
+        }
     }
 }
