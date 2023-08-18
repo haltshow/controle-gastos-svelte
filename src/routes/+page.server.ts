@@ -5,7 +5,7 @@ import { redirect } from "@sveltejs/kit";
 export const load: PageServerLoad = async ({ locals }) => {
     if (!locals.user) {
         console.log("locals: ", locals)
-
+        return null;
         // throw redirect(308, '/login');
     }
     async function getEntradaTotal() {
