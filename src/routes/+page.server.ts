@@ -1,10 +1,11 @@
 import type { PageServerLoad } from "./$types";
 import prisma from "$lib/server/prisma";
 import { redirect } from "@sveltejs/kit";
+import { goto } from '$app/navigation';
 
 export const load: PageServerLoad = async ({ locals }) => {
     if (!locals.user) {
-        throw redirect(308, '/login')
+        goto('/login');
     }
     async function getEntradaTotal() {
         const ag = await prisma.entrada.aggregate({
