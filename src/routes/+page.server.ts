@@ -3,10 +3,17 @@ import prisma from "$lib/server/prisma";
 import { redirect } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ locals }) => {
-    if (!locals.user) {
-        console.log("locals: ", locals)
-        throw redirect(308, '/login');
-    }
+    // if (!locals.user) {
+    //     console.log("locals: ", locals)
+    //     throw redirect(308, '/login');
+    // } else {
+    //     return {
+    //         entrada: getEntradaTotal(), 
+    //         saida: getSaidaTotal(),
+    //         entradasByOrigem: sumEntradaGroupByOrigem(),
+    //         saidasByOrigem: sumSaidaGroupByOrigem(),
+    //     }
+    // }
     async function getEntradaTotal() {
         const ag = await prisma.entrada.aggregate({
             _sum: {valor: true}, 
