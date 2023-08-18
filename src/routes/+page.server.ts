@@ -63,7 +63,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
     if (!locals.user) {
         console.log("locals root: ", locals)
-        throw redirect(308, '/login')
+        throw redirect(307, '/login')
     } else {
         console.log("locals root: ", locals)
         return {
