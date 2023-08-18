@@ -1,129 +1,132 @@
 <script>
-	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+  import 'iconify-icon';
+  export let user = {
+    id: '',
+    name: ''
+  }
 </script>
 
-<header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
+<header class="flex justify-center">
+  <!-- Navigation bar -->
+  <nav
+    class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start"
+    data-te-navbar-ref>
+    
+      <div class="flex items-center">
+        <!-- Hamburger menu button -->
+        <button
+          class="border-0 bg-transparent px-2 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:hidden"
+          type="button"
+          data-te-collapse-init
+          data-te-target="#navbarSupportedContentY"
+          aria-controls="navbarSupportedContentY"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <!-- Hamburger menu icon -->
+          <span class="[&>svg]:w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-7 w-7">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </span>
+        </button>
+      </div>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
-
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div>
+      <!-- Navigation links -->
+      <div
+        class="!visible hidden w-full lg:!flex lg:justify-between"
+        id="navbarSupportedContentY">
+        <div class="p-1 ml-4">
+          <ul
+            class="flex flex-col lg:flex-row lg:justify-center lg:items-center text-[18px] w-full"
+            data-te-navbar-nav-ref>
+            {#if !user.name }
+              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  href="/register"
+                  data-te-nav-link-ref
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                  >Register</a
+                >
+              </li>
+              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                  href="/login"
+                  data-te-nav-link-ref
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                  >Login</a
+                >
+              </li>
+            {:else}
+              <li class="mb-4 lg:mb-0 lg:pr-2 flex justify-center items-center" data-te-nav-item-ref>
+                <form action="/logout" method="POST">
+                  <button class="flex justify-center items-center">
+                    <iconify-icon icon="material-symbols:logout" class="text-[24px] text-blue-500"></iconify-icon>
+                  </button>
+                </form>
+                <p
+                  class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90 text-blue-500"
+                >
+                  Olá, {user?.name}
+                </p>
+              </li>
+            {/if}
+          </ul>
+        </div>
+        <div class="p-1">
+          <ul
+            class="flex flex-col lg:flex-row lg:justify-center lg:items-center text-[18px]"
+            data-te-navbar-nav-ref>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a
+                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                href="/"
+                data-te-nav-link-ref
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                >Home</a
+              >
+            </li>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a
+                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                href="/entrada"
+                data-te-nav-link-ref
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                >Entradas</a
+              >
+            </li>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a
+                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+                href="/saida"
+                data-te-nav-link-ref
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                >Saídas</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="!visible mr-10"></div>
+      </div>
+    
+  </nav>
 </header>
 
 <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
-	}
+	
 </style>
