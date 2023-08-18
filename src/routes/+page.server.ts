@@ -61,10 +61,7 @@ export const load: PageServerLoad = async ({ locals }) => {
         return data;
     }
 
-    if (!locals.user) {
-        console.log("locals root: ", locals)
-        throw redirect(307, '/login')
-    } else {
+    if (locals.user) {
         console.log("locals root: ", locals)
         return {
             entrada: getEntradaTotal(), 
