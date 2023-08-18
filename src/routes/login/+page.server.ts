@@ -5,7 +5,7 @@ import prisma from "$lib/server/prisma";
 
 export const load: PageServerLoad = async ({ locals }) => {
     if (locals.user) {
-        console.log("locals: ", locals)
+        console.log("locals login: ", locals)
         throw redirect(308, '/')
     }
 }
@@ -51,7 +51,7 @@ const login: Action = async ({ cookies, request }) => {
         maxAge: 60 * 60 * 24 * 30,
     })
 
-    throw redirect(308, '/')
+    throw redirect(302, '/')
 }
 
 export const actions: Actions = { login };

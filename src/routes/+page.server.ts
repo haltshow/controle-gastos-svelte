@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ locals }) => {
         const ag = await prisma.entrada.aggregate({
             _sum: {valor: true}, 
             where: {
-                idUser: locals.user.id
+                idUser: locals?.user?.id
             }
         });
         return Number(ag._sum.valor);
@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({ locals }) => {
         const ag = await prisma.saida.aggregate({
             _sum: {valor: true},
             where: {
-                idUser: locals.user.id
+                idUser: locals?.user?.id
             }
         });
         return Number(ag._sum.valor);
@@ -30,7 +30,7 @@ export const load: PageServerLoad = async ({ locals }) => {
                 valor: true,
             },
             where: {
-                idUser: locals.user.id
+                idUser: locals?.user?.id
             }
         });
 
@@ -49,7 +49,7 @@ export const load: PageServerLoad = async ({ locals }) => {
                 valor: true,
             },
             where: {
-                idUser: locals.user.id
+                idUser: locals?.user?.id
             }
         });
 
@@ -62,10 +62,10 @@ export const load: PageServerLoad = async ({ locals }) => {
     }
 
     if (!locals.user) {
-        console.log("locals: ", locals)
-        return {}
-        // throw redirect(308, '/login');
+        console.log("locals root: ", locals)
+        throw redirect(308, '/login')
     } else {
+        console.log("locals root: ", locals)
         return {
             entrada: getEntradaTotal(), 
             saida: getSaidaTotal(),
