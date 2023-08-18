@@ -6,7 +6,7 @@
 </script>
 
 <section class="text-[18px] text-center">
-    <a href="/saida">
+    <a href="/origem/saida">
         <button type="submit" class="bg-blue-500 text-sky-50 rounded-sm p-2 mb-4">
             Voltar
         </button>

@@ -1,11 +1,18 @@
-import { fail, type Actions } from "@sveltejs/kit";
+import { fail, type Actions, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/prisma";
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ locals }) => {
+    if (!locals.user) {
+        throw redirect(302, '/login')
+    }
     const getOrigens : any = async () => {
       
-        const origens = await prisma.origemEntrada.findMany();
+        const origens = await prisma.origemEntrada.findMany({
+            where: {
+                idUser: locals.user.id
+            }
+        });
     
         if (!origens) {
             return fail(500, { message: 'Não foi possível trazer todas as entradas.'})

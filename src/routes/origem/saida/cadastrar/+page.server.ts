@@ -1,8 +1,17 @@
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 
+export const load: PageServerLoad = async ({ locals }) => {
+    if (!locals.user) {
+        throw redirect(302, '/login')
+    }
+    if (locals.user.username == 'demo') {
+        throw redirect(302, '/origem/saida')
+    }
+};
+
 export const actions: Actions = {
-    createOrigem: async ({ request }) => {
+    createOrigem: async ({ request, locals }) => {
         const { nome } = Object.fromEntries(await request.formData()) as {
             nome: any,
         }
@@ -10,7 +19,8 @@ export const actions: Actions = {
         try {
             await prisma.origemSaida.create({
                 data: {
-                    nome: nome,
+                    nome,
+                    idUser: locals.user.id
                 }
             })
 

@@ -1,6 +1,7 @@
 <script>
   import 'iconify-icon';
   export let user = {
+    id: '',
     name: ''
   }
 </script>

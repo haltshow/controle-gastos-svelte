@@ -1,8 +1,11 @@
-import { fail, type Actions } from "@sveltejs/kit";
+import { fail, type Actions, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/prisma";
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
+    if (!locals.user) {
+        throw redirect(302, '/login')
+    }
     const getOrigem = async () => {
       
         const entrada : any = await prisma.origemEntrada.findUnique({

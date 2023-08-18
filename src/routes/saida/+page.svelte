@@ -16,7 +16,7 @@
 			</button>
 		</a>
 
-		<a href="/origem/saida/cadastrar">
+		<a href="/origem/saida">
 			<button type="button" class="bg-green-500 text-sky-50 text-[16px] p-2 rounded-md flex justify-center items-center gap-2">
 				Origem Saida
 			</button>
