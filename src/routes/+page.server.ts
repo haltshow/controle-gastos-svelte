@@ -1,9 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import prisma from "$lib/server/prisma";
-import { redirect } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ locals }) => {
-    console.log("locals root: ", locals);
     async function getEntradaTotal() {
         const ag = await prisma.entrada.aggregate({
             _sum: {valor: true}, 
@@ -63,7 +61,6 @@ export const load: PageServerLoad = async ({ locals }) => {
     }
 
     if (locals.user) {
-        console.log("locals root: ", locals)
         return {
             entrada: getEntradaTotal(), 
             saida: getSaidaTotal(),
