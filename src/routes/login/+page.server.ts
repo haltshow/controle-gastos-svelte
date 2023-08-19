@@ -5,7 +5,7 @@ import prisma from "$lib/server/prisma";
 
 export const load: PageServerLoad = async ({ locals }) => {
     if (locals.user) {
-        throw redirect(307, '/admin')
+        throw redirect(307, '/')
     }
 }
 
